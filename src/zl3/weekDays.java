@@ -46,11 +46,11 @@ public class weekDays {
 
     static String busHours(int input){
         if(input <= 5){
-            return "Pn-Pt: 5:30";
+            return "05:30";
         } else if (input == 6) {
-            return "So: 07:00";
+            return "07:00";
         } else {
-            return "Nd: 09:00";
+            return "09:00";
         }
     }
 }
