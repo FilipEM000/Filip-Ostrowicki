@@ -5,33 +5,33 @@ import java.util.Scanner;
 public class homework03 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int number = 0;
+        int number;
 
-        while (number == 0) {
+        do {
             System.out.println("Podaj dowolną liczbę całkowitą inną niż 0");
             number = scanner.nextInt();
-        }
+        } while (number == 0);
 
         String type = number > 0 ? "positive" : "negative";
-        String divisibility = divisibilityCheck(number);
-        String size = sizeCheck(number);
+        String divisibility = checkDivisibility(number);
+        String size = checkSize(number);
 
 
         System.out.println("Number: " + number + ", Type: " + type + ", Divisibility: " + divisibility + ", Size: " + size);
     }
 
-    private static String sizeCheck(int number) {
-        if(Math.abs(number) <= 10){
+    private static String checkSize(int number) {
+        if (Math.abs(number) <= 10) {
             return "small";
         } else if (Math.abs(number) <= 100) {
             return "medium";
-        }else {
-            return "large;";
+        } else {
+            return "large";
         }
     }
 
 
-    private static String divisibilityCheck(int number){
+    private static String checkDivisibility(int number) {
         if (number % 6 == 0) {
             return "divisible by 2 and 3";
         } else if (number % 2 == 0) {
