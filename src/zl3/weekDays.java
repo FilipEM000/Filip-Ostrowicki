@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class weekDays {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj liczbę 1-7, która reprezentuje dzień tygodnia");
+        System.out.println("Podaj liczbę całkowitą 1-7, która reprezentuje dzień tygodnia");
         int input = scanner.nextInt();
         String type = (input <= 5) ? "Dzień roboczy" : " Weekend";
 
