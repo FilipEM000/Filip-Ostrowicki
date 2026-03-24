@@ -2,13 +2,18 @@ package pd04;
 
 import java.util.Scanner;
 
-public class homework04 {
+public class Scoreboard {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         //Wczytanie liczby graczy i wyników
         System.out.println("Podaj liczbę graczy");
         int numberOfPlayers = scanner.nextInt();
+
+        while (numberOfPlayers < 2 || numberOfPlayers > 10) {
+            System.out.println("Liczba graczy musi być z zakresu od 2 do 10");
+            numberOfPlayers = scanner.nextInt();
+        }
         scanner.nextLine();
 
         String[] names = new String[numberOfPlayers];
@@ -49,7 +54,7 @@ public class homework04 {
                 }
             }
             sums[i] = suma;
-            averages[i] = (double) suma / 3;
+            averages[i] = suma / 3.0;
             mins[i] = min;
             maxes[i] = max;
         }
@@ -90,7 +95,7 @@ public class homework04 {
 
         //Leaderboard
         for (int i = 0; i < numberOfPlayers; i++) {
-            System.out.print(names[i] + " - " + sums[i]);
+            System.out.printf("%s - suma punktów: %d - średnia punktów: %.2f - najmniejszy wynik: %d - największy wynik: %d", names[i], sums[i], averages[i], mins[i], maxes[i]);
             if (maxes[i] == bestScore) {
                 System.out.println(" *");
             } else {
@@ -101,8 +106,11 @@ public class homework04 {
         //Podium
         System.out.print("Podium: ");
         for (int i = 0; i < Math.min(3, numberOfPlayers); i++) {
-            System.out.print(names[i] + ", ");
+            if (i == Math.min(3, numberOfPlayers) - 1) {
+                System.out.print(names[i]);
+            } else {
+                System.out.print(names[i] + ", ");
+            }
         }
-
     }
 }
