@@ -4,14 +4,13 @@ import java.util.Scanner;
 
 public class MatrixOperations {
     public static void main(String[] args) {
-
         int[][] matrix = createNewMatrix();
 
         printMatrix(matrix);
         printTranspositionOfMatrix(matrix);
         printMatrixTurnedRight(matrix);
         printSumsOfRows(matrix);
-        printSumsOfCulumns(matrix);
+        printSumsOfColumns(matrix);
         if (isMatrixSymetric(matrix)) {
             System.out.println("\nMacierz jest symetryczna");
         } else {
@@ -30,7 +29,7 @@ public class MatrixOperations {
         return true;
     }
 
-    private static void printSumsOfCulumns(int[][] matrix) {
+    private static void printSumsOfColumns(int[][] matrix) {
         System.out.println("------- Suma kolumn: ");
         for (int i = 0; i < 3; i++) {
             int sumOfColumn = 0;
