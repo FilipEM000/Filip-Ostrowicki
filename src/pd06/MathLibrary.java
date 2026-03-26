@@ -59,11 +59,7 @@ public class MathLibrary {
      * @return factor of the parameter
      */
     static long factorialRecursion(int n) {
-        if (n > 1) {
-            return n * factorialRecursion(n - 1);
-        } else {
-            return n;
-        }
+        return n > 1 ? n * factorialRecursion(n - 1) : n;
     }
 
 
@@ -95,11 +91,7 @@ public class MathLibrary {
                 numberOfFactors += 1;
             }
         }
-        if (numberOfFactors == 2) {
-            return true;
-        } else {
-            return false;
-        }
+        return numberOfFactors == 2;
     }
 
 
