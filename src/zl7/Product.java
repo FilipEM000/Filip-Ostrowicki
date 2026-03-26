@@ -24,6 +24,4 @@ public abstract class Product implements Sellable {
     protected double getPrice() {
         return price;
     }
-
-
 }
