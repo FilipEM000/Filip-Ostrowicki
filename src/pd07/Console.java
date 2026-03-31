@@ -1,16 +1,23 @@
 package pd07;
 
-public non-sealed class Console extends Resource {
-    private String model;
-    private static final double ADDITIONAL_COST = 50;
+import java.math.BigDecimal;
 
-    public Console(String id, String name, double price, Type type, String model) {
+public final class Console extends Resource {
+    private static final BigDecimal ADDITIONAL_COST = new BigDecimal(100);
+
+    private final String model;
+
+    public Console(String id, String name, BigDecimal price, Type type, String model) {
         super(id, name, price, type);
         this.model = model;
     }
 
+    public static Console of(String id, String name, BigDecimal price, String model) {
+        return new Console(id, name, price, Type.CONSOLE, model);
+    }
+
     @Override
-    public double getRentalCost() {
-        return super.getPrice() + ADDITIONAL_COST;
+    public BigDecimal getRentalCost() {
+        return super.getDefaultPrice().add(ADDITIONAL_COST);
     }
 }

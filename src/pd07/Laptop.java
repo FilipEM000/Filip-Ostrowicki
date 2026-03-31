@@ -1,16 +1,23 @@
 package pd07;
 
-public non-sealed class Laptop extends Resource {
-    private double inch;
-    private static final double ADDITIONAL_COST = 200;
+import java.math.BigDecimal;
 
-    public Laptop(String id, String name, double price, Type type, double inch) {
+public final class Laptop extends Resource {
+    private static final BigDecimal ADDITIONAL_COST = new BigDecimal(100);
+
+    private final double inch;
+
+    public Laptop(String id, String name, BigDecimal price, Type type, double inch) {
         super(id, name, price, type);
         this.inch = inch;
     }
 
+    public static Laptop of(String id, String name, BigDecimal price, double inch) {
+        return new Laptop(id, name, price, Type.LAPTOP, inch);
+    }
+
     @Override
-    public double getRentalCost() {
-        return super.getPrice() + ADDITIONAL_COST;
+    public BigDecimal getRentalCost() {
+        return super.getDefaultPrice().add(ADDITIONAL_COST);
     }
 }

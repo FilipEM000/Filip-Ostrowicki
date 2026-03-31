@@ -1,23 +1,23 @@
 package pd07;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class RentalSystem {
     public static void main(String[] args) {
         List<Rental> rentals = new ArrayList<>();
         //początkowa baza wypożyczeń
-        rentals.add(new Rental(new Laptop("A1", "Lenovo", 59.99, Type.LAPTOP, 15.6), 60, Status.ACTIVE));
-        rentals.add(new Rental(new Laptop("A2", "ASUS", 99.99, Type.LAPTOP, 15.6), 60, Status.LATE));
-        rentals.add(new Rental(new Console("B1", "Lenovo", 49.99, Type.CONSOLE, "XBOX"), 60, Status.ACTIVE));
-        rentals.add(new Rental(new Console("B2", "ASUS", 89.99, Type.CONSOLE, "PS"), 60, Status.RETURNED));
+        rentals.add(new Rental(Laptop.of("A1", "Lenovo", new BigDecimal("59.99"), 15.6), 60, Status.ACTIVE));
+        rentals.add(new Rental(Laptop.of("A2", "ASUS", new BigDecimal("99.99"), 15.6), 60, Status.LATE));
+        rentals.add(new Rental(Console.of("B1", "Lenovo", new BigDecimal("49.99"), "XBOX"), 60, Status.ACTIVE));
+        rentals.add(new Rental(Console.of("B2", "ASUS", new BigDecimal("89.99"), "PS"), 60, Status.RETURNED));
         Scanner scanner = new Scanner(System.in);
         int option;
         do {
             menu();
             option = scanner.nextInt();
             scanner.nextLine();
-            rentals.sort(Comparator.comparing((Rental r) -> r.resource().getName())
-                    .thenComparing(Rental::resource));
+            rentals.sort(Comparator.comparing(Rental::getResource).thenComparing(Rental::getResourceName));
             try {
                 switch (option) {
                     case 1 -> addRental(rentals);
@@ -31,8 +31,6 @@ public class RentalSystem {
                 System.err.println("Podałeś złą wartość!");
             }
         } while (option != 0);
-
-
     }
 
     private static void printAllRentals(List<Rental> rentals) {
@@ -45,14 +43,16 @@ public class RentalSystem {
     private static void getNumberOfRentalsByStatus(List<Rental> rentals) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Jaki status cię interesuje?");
-        Status status = Status.valueOf(scanner.nextLine());
+        String input = scanner.nextLine();
+        Status status = parseStatusFromString(input);
+
         int result = 0;
         for (Rental rental : rentals) {
             if (rental.getStatus() == status) {
                 result++;
             }
         }
-        System.out.println("Liczba wyppżyczeń o statusie " + status + ": " + result);
+        System.out.println("Liczba wypożyczeń o statusie " + status + ": " + result);
     }
 
     private static void menu() {
@@ -60,7 +60,7 @@ public class RentalSystem {
                 [1] - dodaj nowe wypożyczenie
                 [2] - oblicz łączny koszt wszystich wypożyczeń
                 [3] - wyświetl liczbę wypożyczeń o wskazanym stanie
-                [4] - wyświetl wszystkiw wypożyczenia
+                [4] - wyświetl wszystkie wypożyczenia
                 [0] - wyjdź z programu
                 """);
     }
@@ -72,10 +72,12 @@ public class RentalSystem {
         System.out.println("Podaj nazwę");
         String name = scanner.nextLine();
         System.out.println("Podaj cenę bazową");
-        double price = scanner.nextDouble();
+        String priceInput = scanner.nextLine();
+        BigDecimal price = new BigDecimal(priceInput);
         scanner.nextLine();
         System.out.println("Podaj typ wypożyczonego przedmiotu");
-        Type type = Type.valueOf(scanner.nextLine());
+        String input = scanner.nextLine();
+        Type type = parseTypeFromString(input);
         System.out.println("Na ile dni jest wypożyczenie?");
         int numberOfDays = scanner.nextInt();
         scanner.nextLine();
@@ -97,10 +99,24 @@ public class RentalSystem {
     }
 
     private static void getTotalCost(List<Rental> rentals) {
-        double sum = 0;
+        BigDecimal sum = new BigDecimal(0);
         for (Rental rental : rentals) {
-            sum = sum + rental.getRentalCost();
+            sum = sum.add(rental.getResource().getRentalCost());
         }
         System.out.println("Łączna koszt wszystkich wypożyczeń to: " + sum);
+    }
+
+    private static Status parseStatusFromString(String input) {
+        return Arrays.stream(Status.values())
+                .filter(s -> s.name().equals(input.strip().toUpperCase()))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+    private static Type parseTypeFromString(String input) {
+        return Arrays.stream(Type.values())
+                .filter(s -> s.name().equals(input.strip().toUpperCase()))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

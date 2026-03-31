@@ -1,34 +1,33 @@
 package pd07;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.ToString;
 
-@Data
+import java.math.BigDecimal;
+
+@ToString
+@Getter
 
 public abstract sealed class Resource implements Comparable<Resource> permits Laptop, Console {
     private final String id;
-    private String name;
-    private double price;
-    private Type type;
-    public static int numberOfResources = 0;
+    private final String name;
+    private final BigDecimal defaultPrice;
+    private final Type type;
+    private static int numberOfResources = 0;
 
-    public Resource(String id, String name, double price, Type type) {
+    public Resource(String id, String name, BigDecimal defaultPrice, Type type) {
         this.id = id;
         this.name = name;
-        this.price = price;
+        this.defaultPrice = defaultPrice;
         this.type = type;
         numberOfResources++;
     }
 
-    public abstract double getRentalCost();
+    public abstract BigDecimal getRentalCost();
 
     @Override
     public int compareTo(Resource resource) {
-        return Double.compare(this.price, resource.price);
-    }
-
-    @Override
-    public String toString() {
-        return "id: " + id + ", name: " + name + ", price: " + price + ", type: " + type;
+        return this.defaultPrice.compareTo(resource.getDefaultPrice());
     }
 }
 
