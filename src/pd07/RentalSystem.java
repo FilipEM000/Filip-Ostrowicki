@@ -102,7 +102,7 @@ public class RentalSystem {
         for (Rental rental : rentals) {
             sum = sum.add(rental.calculateTotalPrice());
         }
-        System.out.println("Łączna koszt wszystkich wypożyczeń to: " + sum);
+        System.out.println("Łączny koszt wszystkich wypożyczeń to: " + sum);
     }
 
     private static Status parseStatusFromString(String input) {
