@@ -11,23 +11,23 @@ import java.math.BigDecimal;
 public abstract sealed class Resource implements Comparable<Resource> permits Laptop, Console {
     private final String id;
     private final String name;
-    private final BigDecimal defaultPrice;
+    private final BigDecimal basePrice;
     private final Type type;
     private static int numberOfResources = 0;
 
-    public Resource(String id, String name, BigDecimal defaultPrice, Type type) {
+    public Resource(String id, String name, BigDecimal basePrice, Type type) {
         this.id = id;
         this.name = name;
-        this.defaultPrice = defaultPrice;
+        this.basePrice = basePrice;
         this.type = type;
         numberOfResources++;
     }
 
-    public abstract BigDecimal getRentalCost();
+    public abstract BigDecimal calculatePricePerDay();
 
     @Override
     public int compareTo(Resource resource) {
-        return this.defaultPrice.compareTo(resource.getDefaultPrice());
+        return this.basePrice.compareTo(resource.getBasePrice());
     }
 }
 

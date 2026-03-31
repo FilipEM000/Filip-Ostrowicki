@@ -3,7 +3,7 @@ package pd07;
 import java.math.BigDecimal;
 
 public final class Console extends Resource {
-    private static final BigDecimal ADDITIONAL_COST = new BigDecimal(100);
+    private static final BigDecimal ADDITIONAL_COST = new BigDecimal(5);
 
     private final String model;
 
@@ -17,7 +17,7 @@ public final class Console extends Resource {
     }
 
     @Override
-    public BigDecimal getRentalCost() {
-        return super.getDefaultPrice().add(ADDITIONAL_COST);
+    public BigDecimal calculatePricePerDay() {
+        return super.getBasePrice().add(ADDITIONAL_COST);
     }
 }

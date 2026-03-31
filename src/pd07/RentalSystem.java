@@ -7,10 +7,10 @@ public class RentalSystem {
     public static void main(String[] args) {
         List<Rental> rentals = new ArrayList<>();
         //początkowa baza wypożyczeń
-        rentals.add(new Rental(Laptop.of("A1", "Lenovo", new BigDecimal("59.99"), 15.6), 60, Status.ACTIVE));
-        rentals.add(new Rental(Laptop.of("A2", "ASUS", new BigDecimal("99.99"), 15.6), 60, Status.LATE));
-        rentals.add(new Rental(Console.of("B1", "Lenovo", new BigDecimal("49.99"), "XBOX"), 60, Status.ACTIVE));
-        rentals.add(new Rental(Console.of("B2", "ASUS", new BigDecimal("89.99"), "PS"), 60, Status.RETURNED));
+        rentals.add(new Rental(Laptop.of("A1", "Lenovo", new BigDecimal("19.99"), 15.6), 60, Status.ACTIVE));
+        rentals.add(new Rental(Laptop.of("A2", "ASUS", new BigDecimal("39.99"), 15.6), 60, Status.LATE));
+        rentals.add(new Rental(Console.of("B1", "XBOX", new BigDecimal("29.99"), "ONE-S"), 60, Status.ACTIVE));
+        rentals.add(new Rental(Console.of("B2", "PS", new BigDecimal("49.99"), "5-PRO"), 60, Status.RETURNED));
         Scanner scanner = new Scanner(System.in);
         int option;
         do {
@@ -74,7 +74,6 @@ public class RentalSystem {
         System.out.println("Podaj cenę bazową");
         String priceInput = scanner.nextLine();
         BigDecimal price = new BigDecimal(priceInput);
-        scanner.nextLine();
         System.out.println("Podaj typ wypożyczonego przedmiotu");
         String input = scanner.nextLine();
         Type type = parseTypeFromString(input);
@@ -101,7 +100,7 @@ public class RentalSystem {
     private static void getTotalCost(List<Rental> rentals) {
         BigDecimal sum = new BigDecimal(0);
         for (Rental rental : rentals) {
-            sum = sum.add(rental.getResource().getRentalCost());
+            sum = sum.add(rental.calculateTotalPrice());
         }
         System.out.println("Łączna koszt wszystkich wypożyczeń to: " + sum);
     }
