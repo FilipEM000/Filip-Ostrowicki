@@ -18,6 +18,6 @@ public final class Console extends Resource {
 
     @Override
     public BigDecimal calculatePricePerDay() {
-        return super.getBasePrice().add(ADDITIONAL_COST);
+        return ADDITIONAL_COST.add(super.getBasePrice());
     }
 }
