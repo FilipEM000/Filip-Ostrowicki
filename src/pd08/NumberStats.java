@@ -1,6 +1,7 @@
 package pd08;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NumberStats<T extends Number & Comparable<T>> {
@@ -46,7 +47,7 @@ public class NumberStats<T extends Number & Comparable<T>> {
         }
         double sum = 0;
         for (T number : listOfNumbers) {
-            sum = sum + number.doubleValue();
+            sum += number.doubleValue();
         }
         return sum;
     }
@@ -60,7 +61,7 @@ public class NumberStats<T extends Number & Comparable<T>> {
             return null;
         }
         List<T> sortedCopy = new ArrayList<>(listOfNumbers);
-        sortedCopy.sort(null);
+        Collections.sort(sortedCopy);
         return sortedCopy;
     }
 }
