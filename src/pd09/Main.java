@@ -13,9 +13,9 @@ public class Main {
     public static void main(String[] args) {
         List<String> listOfStrings = List.of("Ad am ", "   KamIl", " M aci ej");
 
-        StringConverter<String> removeSpaces = input -> input.replace(" ", "");
+        StringConverter<String> removeSpaces = String::trim;
         StringConverter<String> toUpperLetters = String::toUpperCase;
-        StringConverter<String> chopToLengthOf6 = input -> input.length() < 6 ? input : input.substring(0, 6);
+        StringConverter<String> chopToLengthOf6 = input -> input.length() <= 6 ? input : input.substring(0, 5);
         StringConverter<String> addPrefix = input -> "Prefix" + input;
 
         System.out.println(transform(listOfStrings, removeSpaces
