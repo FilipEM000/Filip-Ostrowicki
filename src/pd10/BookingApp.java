@@ -18,8 +18,8 @@ public class BookingApp {
         System.out.println(buildTripDescription(User.of("Adam", null, new BigDecimal(800)), trips));
     }
 
-    private static Optional<Trip> findByDestination(List<Trip> list, String destinationName) {
-        return list.stream()
+    private static Optional<Trip> findByDestination(List<Trip> trips, String destinationName) {
+        return trips.stream()
                 .filter(trip -> trip.getDestination().getName().equals(destinationName))
                 .findFirst();
     }
@@ -36,8 +36,8 @@ public class BookingApp {
     }
 
     private static String buildTripDescription(User user, List<Trip> trips) {
-        Optional<Trip> result = findBestTrip(user, trips);
-
-        return result.map(trip -> trip.getDestination().getName() + " - " + trip.getTransport() + " - " + trip.getPrice()).orElse("No trip available");
+        return findBestTrip(user, trips)
+                .map(trip -> trip.getDestination().getName() + " - " + trip.getTransport() + " - " + trip.getPrice())
+                .orElse("No trip available");
     }
 }
