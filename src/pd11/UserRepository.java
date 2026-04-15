@@ -2,7 +2,7 @@ package pd11;
 
 import java.util.HashMap;
 
-public class UserDatabase {
+public class UserRepository {
     HashMap<String, User> database = new HashMap<>();
 
     public boolean containsEmail(String email){

@@ -2,6 +2,6 @@ package pd11;
 
 public class RegistrationException extends RuntimeException {
     public RegistrationException(String message) {
-        super(message);
+        super("Błąd podczas rejestracji użytkownika: " + message);
     }
 }

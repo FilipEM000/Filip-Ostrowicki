@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class UserRegistrationService {
 
     public static void main(String[] args) {
-        UserDatabase database = new UserDatabase();
+        UserRepository database = new UserRepository();
         Scanner scanner = new Scanner(System.in);
 
         int option;
@@ -19,9 +19,7 @@ public class UserRegistrationService {
                 String password = scanner.nextLine();
                 registerUser(name, email, password, database);
                 database.printDatabase();
-            } catch (ValidationException e) {
-                System.err.println("Błąd podczas dodawania danych użytkownika: " + e.getMessage());
-            } catch (DuplicateEmailException | WeakPasswordException e) {
+            } catch (ValidationException | DuplicateEmailException | WeakPasswordException e) {
                 System.err.println(e.getMessage());
             } finally {
                 System.out.println("[1] - dodaj użytkownika\n[0] - wyjdź");
@@ -31,8 +29,8 @@ public class UserRegistrationService {
         } while (option != 0);
     }
 
-    private static void registerUser(String name, String email, String password, UserDatabase database) {
-        if (!validateName(name)) {
+    private static void registerUser(String name, String email, String password, UserRepository database) {
+        if (!isNameValid(name)) {
             throw new ValidationException("Name", "W nazwie pojawiły się niedozwolone znaki");
         }
 
@@ -40,7 +38,7 @@ public class UserRegistrationService {
             throw new ValidationException("Email", "Zła składnia emaila");
         }
 
-        if (validatePassword(password) == PasswordStrength.WEAK) {
+        if (resolvePasswordStrength(password) == PasswordStrength.WEAK) {
             throw new WeakPasswordException("Hasło zbyt słabe", PasswordStrength.WEAK);
         }
 
@@ -48,7 +46,7 @@ public class UserRegistrationService {
         database.add(user);
     }
 
-    private static boolean validateName(String name) {
+    private static boolean isNameValid(String name) {
         if (name == null) {
             throw new ValidationException("Nazwa", "Nazwa nie istnieje");
         }
@@ -60,7 +58,7 @@ public class UserRegistrationService {
         return name.trim().matches("[A-Za-z\\s-]+");
     }
 
-    private static PasswordStrength validatePassword(String password) {
+    private static PasswordStrength resolvePasswordStrength(String password) {
         int score = 0;
 
         if (password == null) {
@@ -90,7 +88,7 @@ public class UserRegistrationService {
         };
     }
 
-    private static boolean validateEmail(String email, UserDatabase database) {
+    private static boolean validateEmail(String email, UserRepository database) {
         if (email == null) {
             throw new ValidationException("Email", "Email nie istnieje");
         }
