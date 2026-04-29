@@ -1,0 +1,21 @@
+date,product_id,product_name,category,quantity,unit_price
+2024-01-01,1,Laptop Dell XPS,Electronics,2,5999.99
+2024-01-02,2,Smartphone Samsung,Electronics,3,3999.99
+2024-01-03,3,Headphones Sony,Electronics,5,1499.99
+2024-01-04,4,Smartwatch Apple,Electronics,4,2499.99
+2024-01-05,5,Vacuum Cleaner Dyson,Home,1,2999.99
+2024-01-06,6,Air Fryer Philips,Home,6,899.99
+2024-01-07,7,Coffee Machine DeLonghi,Home,2,1299.99
+2024-01-08,8,Blender Bosch,Home,3,499.99
+2024-01-09,9,Clean Code,Book,10,119.99
+2024-01-10,10,Effective Java,Book,8,139.99
+2024-01-11,11,Design Patterns,Book,7,159.99
+2024-01-12,12,Refactoring,Book,9,129.99
+2024-01-13,13,Nike Air Max,Clothing,4,499.99
+2024-01-14,14,Adidas Hoodie,Clothing,5,299.99
+2024-01-15,15,Levis Jeans,Clothing,3,399.99
+2024-01-16,16,Puma T-Shirt,Clothing,6,149.99
+2024-01-17,17,Organic Honey,Food,12,39.99
+2024-01-18,18,Olive Oil,Food,10,59.99
+2024-01-19,19,Dark Chocolate,Food,15,19.99
+2024-01-20,20,Green Tea,Food,11,29.99
