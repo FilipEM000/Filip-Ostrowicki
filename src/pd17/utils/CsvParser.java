@@ -1,6 +1,8 @@
-package pd17;
+package pd17.utils;
 
-import pd17.Sale.Sale;
+import lombok.NoArgsConstructor;
+import pd17.Product;
+import pd17.sale.Sale;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -11,7 +13,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class CsvParser {
+@NoArgsConstructor
+public final class CsvParser {
 
     private static Optional<Sale> parseLine(String line, int lineNumber) {
         String[] parts = line.split(",", -1);

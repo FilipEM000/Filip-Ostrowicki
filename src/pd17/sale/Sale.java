@@ -1,4 +1,4 @@
-package pd17.Sale;
+package pd17.sale;
 
 import pd17.Product;
 

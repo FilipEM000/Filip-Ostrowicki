@@ -1,4 +1,4 @@
-package pd17.Sale;
+package pd17.sale;
 
 import pd17.Product;
 
@@ -16,13 +16,13 @@ public class SaleService {
     }
 
     public BigDecimal getTotalRevenue() {
-        return saleRepository.sales.stream()
+        return saleRepository.getAll().stream()
                 .map(sale -> sale.product().getUnitPrice().multiply(BigDecimal.valueOf(sale.quantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public List<Product> getTop3Products() {
-        return saleRepository.sales.stream()
+        return saleRepository.getAll().stream()
                 .sorted(Comparator.comparing(sale -> sale.product().getUnitPrice().multiply(BigDecimal.valueOf(sale.quantity())), Comparator.reverseOrder()))
                 .limit(3)
                 .map(Sale::product)
@@ -30,7 +30,7 @@ public class SaleService {
     }
 
     public Map<String, BigDecimal> getRevenueByCategory() {
-        return saleRepository.sales.stream()
+        return saleRepository.getAll().stream()
                 .collect(Collectors.groupingBy(
                         sale -> sale.product().getCategory(),
                         Collectors.mapping(sale -> sale.product().getUnitPrice().multiply(BigDecimal.valueOf(sale.quantity())), Collectors.reducing(BigDecimal.ZERO, BigDecimal::add))
@@ -38,7 +38,7 @@ public class SaleService {
     }
 
     public Map<String, Double> getAveragePricePerCategory() {
-        return saleRepository.sales.stream()
+        return saleRepository.getAll().stream()
                 .map(Sale::product)
                 .collect(Collectors.groupingBy(Product::getCategory,
                         Collectors.averagingDouble(product -> product.getUnitPrice().doubleValue())
