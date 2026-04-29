@@ -1,4 +1,4 @@
-package pd16.Model;
+package pd16.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,15 +1,19 @@
-package pd16.Repository;
+package pd16.repository;
 
-import pd16.Model.Client;
-import pd16.Exception.ClientRegistrationException;
+import pd16.model.Client;
+import pd16.exception.ClientRegistrationException;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class ClientRepository {
-    Set<Client> clients = new HashSet<>();
+    private Set<Client> clients = new HashSet<>();
 
-    public void addClient(Client client) {
+    public Set<Client> findAll() {
+        return clients;
+    }
+
+    public void save(Client client) {
         clients.add(client);
     }
 

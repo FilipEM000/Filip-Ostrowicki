@@ -1,13 +1,13 @@
-package pd16.Service;
+package pd16.service;
 
-import pd16.*;
-import pd16.Exception.GameRegistrationException;
-import pd16.Model.Client;
-import pd16.Model.Game;
-import pd16.Model.Rental;
-import pd16.Repository.ClientRepository;
-import pd16.Repository.GameRepository;
-import pd16.Repository.RentalRepository;
+import pd16.exception.GameRegistrationException;
+import pd16.model.Client;
+import pd16.model.Game;
+import pd16.model.Rental;
+import pd16.model.Status;
+import pd16.repository.ClientRepository;
+import pd16.repository.GameRepository;
+import pd16.repository.RentalRepository;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -39,7 +39,7 @@ public class GameService {
             throw new GameRegistrationException("Gra nie może mieć ceny mniejszej niż 0");
         }
 
-        gameRepository.addGame(Game.of(name, category, price));
+        gameRepository.save(Game.of(name, category, price));
     }
 
     public void rentGame() {
@@ -49,13 +49,13 @@ public class GameService {
         System.out.println("Podaj nazwę gry, którą chciałby wypożyczyć");
         String gameName = scanner.nextLine();
 
-        gameRepository.getGames().stream()
+        gameRepository.findAll().stream()
                 .filter(game -> game.getName().equals(gameName))
                 .filter(Game::isAvailable)
                 .findFirst()
                 .ifPresentOrElse(game -> {
                     game.setStatus(Status.RENTED);
-                    rentalRepository.getRentals().add(new Rental(client, game));
+                    rentalRepository.save(new Rental(client, game));
                     System.out.println("Gra została pomyślnie wypożyczona");
                 }, () -> System.err.printf("Gra %s nie jest dostępna\n", gameName));
     }
@@ -64,7 +64,7 @@ public class GameService {
         System.out.println("Podaj nazwę gry, którą chciałby zwrócić");
         String gameName = scanner.nextLine();
 
-        gameRepository.getGames().stream()
+        gameRepository.findAll().stream()
                 .filter(game -> game.getName().equals(gameName))
                 .filter(game -> game.getStatus() == Status.RENTED)
                 .findFirst()
@@ -75,7 +75,7 @@ public class GameService {
     }
 
     public void printRentedGames() {
-        gameRepository.getGames().stream()
+        gameRepository.findAll().stream()
                 .filter(game -> game.getStatus() == Status.RENTED)
                 .forEach(System.out::println);
     }

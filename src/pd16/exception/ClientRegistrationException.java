@@ -1,4 +1,4 @@
-package pd16.Exception;
+package pd16.exception;
 
 public class ClientRegistrationException extends RuntimeException {
     public ClientRegistrationException(String message) {

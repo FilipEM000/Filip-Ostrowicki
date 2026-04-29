@@ -1,4 +1,4 @@
-package pd16.Exception;
+package pd16.exception;
 
 public class GameRegistrationException extends RuntimeException {
     public GameRegistrationException(String message) {

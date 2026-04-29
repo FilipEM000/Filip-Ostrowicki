@@ -1,13 +1,13 @@
 package pd16;
 
-import pd16.Exception.ClientRegistrationException;
-import pd16.Exception.GameRegistrationException;
-import pd16.Repository.ClientRepository;
-import pd16.Repository.GameRepository;
-import pd16.Repository.RentalRepository;
-import pd16.Service.ClientService;
-import pd16.Service.GameService;
-import pd16.Service.RentalService;
+import pd16.exception.ClientRegistrationException;
+import pd16.exception.GameRegistrationException;
+import pd16.repository.ClientRepository;
+import pd16.repository.GameRepository;
+import pd16.repository.RentalRepository;
+import pd16.service.ClientService;
+import pd16.service.GameService;
+import pd16.service.RentalService;
 
 import java.util.Scanner;
 

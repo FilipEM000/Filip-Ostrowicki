@@ -1,8 +1,8 @@
-package pd16.Service;
+package pd16.service;
 
-import pd16.Model.Client;
-import pd16.Exception.ClientRegistrationException;
-import pd16.Repository.ClientRepository;
+import pd16.model.Client;
+import pd16.exception.ClientRegistrationException;
+import pd16.repository.ClientRepository;
 
 import java.util.Scanner;
 
@@ -27,6 +27,6 @@ public class ClientService {
             throw new ClientRegistrationException("Klient z podanym adresem email już istnieje");
         }
 
-        clientRepository.addClient(Client.of(name, email));
+        clientRepository.save(Client.of(name, email));
     }
 }
