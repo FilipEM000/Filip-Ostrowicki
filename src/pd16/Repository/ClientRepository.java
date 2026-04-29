@@ -1,12 +1,13 @@
-package pd16;
+package pd16.Repository;
+
+import pd16.Model.Client;
+import pd16.Exception.ClientRegistrationException;
 
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 public class ClientRepository {
     Set<Client> clients = new HashSet<>();
-    Scanner scanner = new Scanner(System.in);
 
     public void addClient(Client client) {
         clients.add(client);
@@ -17,10 +18,7 @@ public class ClientRepository {
                 .anyMatch(client -> client.getEmail().equals(email));
     }
 
-    public Client findClient() {
-        System.out.println("Podaj email użytkownika");
-        String email = scanner.nextLine();
-
+    public Client findClient(String email) {
         return clients.stream()
                 .filter(client1 -> client1.getEmail().equals(email))
                 .findAny()

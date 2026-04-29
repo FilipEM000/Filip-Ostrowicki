@@ -1,9 +1,13 @@
-package pd16;
+package pd16.Repository;
+
+import lombok.Getter;
+import pd16.Model.Game;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class GameRepository {
     List<Game> games = new ArrayList<>(List.of(
             Game.of("The Witcher 3", "RPG", new BigDecimal("149.99")),

@@ -1,6 +1,7 @@
-package pd16;
+package pd16.Model;
 
 import lombok.*;
+import pd16.Status;
 
 import java.math.BigDecimal;
 

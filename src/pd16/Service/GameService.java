@@ -1,4 +1,13 @@
-package pd16;
+package pd16.Service;
+
+import pd16.*;
+import pd16.Exception.GameRegistrationException;
+import pd16.Model.Client;
+import pd16.Model.Game;
+import pd16.Model.Rental;
+import pd16.Repository.ClientRepository;
+import pd16.Repository.GameRepository;
+import pd16.Repository.RentalRepository;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -34,17 +43,19 @@ public class GameService {
     }
 
     public void rentGame() {
-        Client client = clientRepository.findClient();
+        System.out.println("Podaj email użytkownika");
+        String email = scanner.nextLine();
+        Client client = clientRepository.findClient(email);
         System.out.println("Podaj nazwę gry, którą chciałby wypożyczyć");
         String gameName = scanner.nextLine();
 
-        gameRepository.games.stream()
+        gameRepository.getGames().stream()
                 .filter(game -> game.getName().equals(gameName))
                 .filter(Game::isAvailable)
                 .findFirst()
                 .ifPresentOrElse(game -> {
                     game.setStatus(Status.RENTED);
-                    rentalRepository.rentals.add(new Rental(client, game));
+                    rentalRepository.getRentals().add(new Rental(client, game));
                     System.out.println("Gra została pomyślnie wypożyczona");
                 }, () -> System.err.printf("Gra %s nie jest dostępna\n", gameName));
     }
@@ -53,7 +64,7 @@ public class GameService {
         System.out.println("Podaj nazwę gry, którą chciałby zwrócić");
         String gameName = scanner.nextLine();
 
-        gameRepository.games.stream()
+        gameRepository.getGames().stream()
                 .filter(game -> game.getName().equals(gameName))
                 .filter(game -> game.getStatus() == Status.RENTED)
                 .findFirst()
@@ -64,7 +75,7 @@ public class GameService {
     }
 
     public void printRentedGames() {
-        gameRepository.games.stream()
+        gameRepository.getGames().stream()
                 .filter(game -> game.getStatus() == Status.RENTED)
                 .forEach(System.out::println);
     }

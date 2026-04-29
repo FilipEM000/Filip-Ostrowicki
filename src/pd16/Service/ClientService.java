@@ -1,16 +1,20 @@
-package pd16;
+package pd16.Service;
+
+import pd16.Model.Client;
+import pd16.Exception.ClientRegistrationException;
+import pd16.Repository.ClientRepository;
 
 import java.util.Scanner;
 
 public class ClientService {
     ClientRepository clientRepository;
 
-    public ClientService(ClientRepository clientRepository){
+    public ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
-    Scanner scanner = new Scanner(System.in);
 
     public void registerClient() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj nazwę użytkownika");
         String name = scanner.nextLine();
         System.out.println("Podaj email użytkownika");
@@ -24,6 +28,5 @@ public class ClientService {
         }
 
         clientRepository.addClient(Client.of(name, email));
-        System.out.println(clientRepository.clients);
     }
 }

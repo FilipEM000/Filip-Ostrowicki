@@ -1,9 +1,18 @@
 package pd16;
 
+import pd16.Exception.ClientRegistrationException;
+import pd16.Exception.GameRegistrationException;
+import pd16.Repository.ClientRepository;
+import pd16.Repository.GameRepository;
+import pd16.Repository.RentalRepository;
+import pd16.Service.ClientService;
+import pd16.Service.GameService;
+import pd16.Service.RentalService;
+
 import java.util.Scanner;
 
 public class Application {
-    static Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     private final ClientService clientService;
     private final GameService gameService;
