@@ -1,0 +1,16 @@
+package pd17;
+
+import pd17.sale.SaleService;
+import pd17.utils.CsvWriter;
+
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        SaleService saleService = new SaleService();
+        CsvWriter writer = new CsvWriter();
+
+        writer.writeStatistics(saleService);
+        writer.exportToJson(saleService);
+    }
+}
