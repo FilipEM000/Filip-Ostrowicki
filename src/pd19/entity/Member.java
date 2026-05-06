@@ -15,7 +15,7 @@ public class Member {
 
     public boolean canBorrow(){
         return loans.stream()
-                .filter(loan -> loan.getReturnedAt() == null)
+                .filter(Loan::isRented)
                 .count() < 3;
     }
 }

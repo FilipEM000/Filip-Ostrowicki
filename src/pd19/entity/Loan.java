@@ -27,10 +27,10 @@ public class Loan {
     }
 
     public boolean isOverdue() {
-        return isReturned() && dueDate.isBefore(LocalDate.now());
+        return isRented() && dueDate.isBefore(LocalDate.now());
     }
 
-    public boolean isReturned() {
-        return returnedAt != null;
+    public boolean isRented() {
+        return returnedAt == null;
     }
 }
