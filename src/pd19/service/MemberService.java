@@ -1,14 +1,17 @@
 package pd19.service;
 
-import pd19.entity.Loan;
+import pd19.dto.LoanDto;
+import pd19.dto.MemberDto;
 import pd19.entity.Member;
 
 import java.util.List;
 
 public interface MemberService {
-    void register(Member member);
+    void register(MemberDto memberDto);
 
-    Member findById(long id);
+    MemberDto findById(long id);
 
-    List<Loan> getActiveLoans(Long memberId);
+    List<LoanDto> getActiveLoans(Long memberId);
+
+    Member findEntityById(long id);
 }

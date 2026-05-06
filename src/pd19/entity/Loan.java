@@ -17,7 +17,20 @@ public class Loan {
     private LocalDate dueDate;
     private LocalDate returnedAt;
 
-    public boolean isOverdue(){
-        return returnedAt == null && dueDate.isBefore(LocalDate.now());
+    public Loan(long id, Book book, Member member, LocalDate borrowedAt, LocalDate dueDate) {
+        this.id = id;
+        this.book = book;
+        this.member = member;
+        this.borrowedAt = borrowedAt;
+        this.dueDate = dueDate;
+        this.returnedAt = null;
+    }
+
+    public boolean isOverdue() {
+        return isReturned() && dueDate.isBefore(LocalDate.now());
+    }
+
+    public boolean isReturned() {
+        return returnedAt != null;
     }
 }

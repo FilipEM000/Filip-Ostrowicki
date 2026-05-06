@@ -1,17 +1,20 @@
 package pd19.service;
 
+import pd19.dto.BookDto;
 import pd19.entity.Book;
 
 import java.util.List;
 
 public interface BookService {
-    void addBook(Book boob);
+    void addBook(BookDto bookDto);
 
-    Book findByIsbn(String isbn);
+    BookDto findByIsbn(String isbn);
 
-    Book findById(long id);
+    BookDto findById(long id);
 
-    List<Book> findAvailable();
+    List<BookDto> findAvailable();
 
-    List<Book> search(String query);
+    List<BookDto> search(String query);
+
+    Book findEntityById(long id);
 }

@@ -8,11 +8,11 @@ import java.util.Set;
 public class MemberRepository {
     private Set<Member> members = new HashSet<>();
 
-    public Set<Member> findAll(){
+    public Set<Member> findAll() {
         return members;
     }
 
-    public void save(Member member){
+    public void save(Member member) {
         members.add(member);
     }
 }

@@ -8,11 +8,11 @@ import java.util.List;
 public class LoanRepository {
     private List<Loan> loans = new ArrayList<>();
 
-    public List<Loan> findAll(){
+    public List<Loan> findAll() {
         return loans;
     }
 
-    public void save(Loan loan){
+    public void save(Loan loan) {
         loans.add(loan);
     }
 }
