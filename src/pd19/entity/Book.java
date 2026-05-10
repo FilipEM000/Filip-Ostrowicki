@@ -7,7 +7,7 @@ import pd19.exception.BookNotAvailableException;
 @Getter
 @AllArgsConstructor
 public class Book {
-    private long id;
+    private Long id;
     private String isbn;
     private String title;
     private String author;

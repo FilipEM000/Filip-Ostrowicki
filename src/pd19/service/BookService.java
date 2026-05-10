@@ -10,11 +10,11 @@ public interface BookService {
 
     BookDto findByIsbn(String isbn);
 
-    BookDto findById(long id);
+    BookDto findById(Long id);
 
     List<BookDto> findAvailable();
 
     List<BookDto> search(String query);
 
-    Book findEntityById(long id);
+    Book findEntityById(Long id);
 }

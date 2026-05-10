@@ -2,17 +2,28 @@ package pd19.repository;
 
 import pd19.entity.Loan;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoanRepository {
-    private List<Loan> loans = new ArrayList<>();
+    private Map<Long, Loan> loans = new HashMap<>();
 
-    public List<Loan> findAll() {
+    public Map<Long, Loan> findAll() {
         return loans;
     }
 
+    public Loan findById(Long id) {
+        return loans.get(id);
+    }
+
     public void save(Loan loan) {
-        loans.add(loan);
+        if (loans.containsKey(loan.getId())) {
+            throw new IllegalArgumentException("Wypożyczenie o id " + loan.getId() + " już istnieje");
+        }
+        loans.put(loan.getId(), loan);
+    }
+
+    public Long getNextId() {
+        return (long) (loans.size() + 1);
     }
 }

@@ -8,12 +8,12 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class Member {
-    private long id;
+    private Long id;
     private String name;
     private String email;
     private List<Loan> loans;
 
-    public boolean canBorrow(){
+    public boolean canBorrow() {
         return loans.stream()
                 .filter(Loan::isRented)
                 .count() < 3;

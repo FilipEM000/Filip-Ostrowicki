@@ -22,7 +22,7 @@ public class Main {
         BookDto book2 = new BookDto(2, "987-654", "Wiedźmin", "Andrzej Sapkowski", 1990, 1);
         bookService.addBook(book1);
         bookService.addBook(book2);
-        System.out.println(bookService.findById(2).availableCopies());
+        System.out.println(bookService.findById(2L).availableCopies());
 
         MemberDto member1 = new MemberDto(1, "Jan Kowalski", "jan@example.com");
         MemberDto member2 = new MemberDto(2, "Anna Nowak", "anna@example.com");
@@ -33,14 +33,14 @@ public class Main {
         CreateLoanRequest loanRequest1 = new CreateLoanRequest(1, 2);
         LoanDto loanDto = loanService.borrow(loanRequest1);
         System.out.println("Wypożyczono: " + loanDto.book().title() + " dla czytelnika: " + loanDto.memberName());
-        System.out.println(bookService.findById(2).availableCopies());
+        System.out.println(bookService.findById(2L).availableCopies());
 
         CreateLoanRequest loanRequest2 = new CreateLoanRequest(2, 2);
         //loanService.borrow(loanRequest2);
 
         ReturnBookRequest returnRequest = new ReturnBookRequest(loanDto.id());
         loanService.returnBook(returnRequest);
-        System.out.println(bookService.findById(2).availableCopies());
+        System.out.println(bookService.findById(2L).availableCopies());
 
         System.out.println(memberService.getActiveLoans(1L).size());
     }

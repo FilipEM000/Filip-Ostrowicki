@@ -10,14 +10,14 @@ import java.time.LocalDate;
 @Setter
 @Getter
 public class Loan {
-    private long id;
+    private Long id;
     private Book book;
     private Member member;
     private LocalDate borrowedAt;
     private LocalDate dueDate;
     private LocalDate returnedAt;
 
-    public Loan(long id, Book book, Member member, LocalDate borrowedAt, LocalDate dueDate) {
+    public Loan(Long id, Book book, Member member, LocalDate borrowedAt, LocalDate dueDate) {
         this.id = id;
         this.book = book;
         this.member = member;

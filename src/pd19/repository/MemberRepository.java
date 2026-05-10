@@ -2,17 +2,21 @@ package pd19.repository;
 
 import pd19.entity.Member;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MemberRepository {
-    private Set<Member> members = new HashSet<>();
+    private Map<Long, Member> members = new HashMap<>();
 
-    public Set<Member> findAll() {
+    public Map<Long, Member> findAll() {
         return members;
     }
 
     public void save(Member member) {
-        members.add(member);
+        members.put(member.getId(), member);
+    }
+
+    public Member findById(Long id) {
+        return members.get(id);
     }
 }

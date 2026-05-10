@@ -37,7 +37,7 @@ public class LoanServiceImp implements LoanService {
             throw new LoanLimitExceededException("Ta osoba osiągnęła limit wypożyczeń");
         } else {
             book.borrow();
-            Loan loan = new Loan(loanRepository.findAll().size() + 1, book, member, LocalDate.now(), LocalDate.now().plusDays(14));
+            Loan loan = new Loan(loanRepository.getNextId(), book, member, LocalDate.now(), LocalDate.now().plusDays(14));
             loanRepository.save(loan);
             return LoanMapper.mapToDto(loan);
         }
@@ -45,18 +45,19 @@ public class LoanServiceImp implements LoanService {
 
     @Override
     public void returnBook(ReturnBookRequest request) {
-        Loan loan = loanRepository.findAll().stream()
-                .filter(loan1 -> loan1.getId() == request.loanId())
-                .findFirst()
-                .orElseThrow(() -> new LoanNotFoundException("Nie znaleziono takiego wypożyczenia"));
+        Loan loan = loanRepository.findById(request.loanId());
 
+        if(loan == null){
+            throw new LoanNotFoundException("Nie znaleziono takiego wypożyczenia");
+
+        }
         loan.setReturnedAt(LocalDate.now());
         loan.getBook().returnBack();
     }
 
     @Override
     public List<LoanDto> findOverdue() {
-        return loanRepository.findAll().stream()
+        return loanRepository.findAll().values().stream()
                 .filter(Loan::isOverdue)
                 .map(LoanMapper::mapToDto)
                 .toList();

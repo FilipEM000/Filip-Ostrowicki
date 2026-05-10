@@ -24,7 +24,7 @@ public class BookServiceImp implements BookService {
 
     @Override
     public BookDto findByIsbn(String isbn) {
-        return bookRepository.findAll().stream()
+        return bookRepository.findAll().values().stream()
                 .filter(book -> book.getIsbn().equals(isbn))
                 .findFirst()
                 .map(BookMapper::mapToDto)
@@ -32,17 +32,18 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
-    public BookDto findById(long id) {
-        return bookRepository.findAll().stream()
-                .filter(member -> member.getId() == id)
-                .findFirst()
-                .map(BookMapper::mapToDto)
-                .orElseThrow(() -> new MemberNotFoundException("Nie odnaleziono książki o id " + id));
+    public BookDto findById(Long id) {
+        Book book = bookRepository.findById(id);
+
+        if(book == null){
+            throw new BookNotFoundException("Nie odnaleziono książki o id " + id);
+        }
+        return BookMapper.mapToDto(book);
     }
 
     @Override
     public List<BookDto> findAvailable() {
-        return bookRepository.findAll().stream()
+        return bookRepository.findAll().values().stream()
                 .filter(book -> book.getAvailableCopies() > 0)
                 .map(BookMapper::mapToDto)
                 .toList();
@@ -50,7 +51,7 @@ public class BookServiceImp implements BookService {
 
     @Override
     public List<BookDto> search(String query) {
-        return bookRepository.findAll().stream()
+        return bookRepository.findAll().values().stream()
                 .filter(book -> book.getAuthor().toLowerCase().contains(query.toLowerCase()) ||
                         book.getTitle().toLowerCase().contains(query.toLowerCase()))
                 .map(BookMapper::mapToDto)
@@ -58,10 +59,12 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
-    public Book findEntityById(long id) {
-        return bookRepository.findAll().stream()
-                .filter(member -> member.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new MemberNotFoundException("Nie odnaleziono książki o id " + id));
+    public Book findEntityById(Long id) {
+        Book book = bookRepository.findById(id);
+
+        if(book == null){
+            throw new BookNotFoundException("Nie odnaleziono książki o id " + id);
+        }
+        return book;
     }
 }
