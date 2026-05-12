@@ -1,5 +1,6 @@
 package pd20.Client;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,10 +14,10 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 public class RestCountriesClient {
-    ObjectMapper objectMapper = new ObjectMapper()
+    private ObjectMapper objectMapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-    HttpClient client = HttpClient.newBuilder()
+    private HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(5))
             .followRedirects(HttpClient.Redirect.NORMAL)
             .version(HttpClient.Version.HTTP_2)
@@ -30,7 +31,7 @@ public class RestCountriesClient {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        JsonNode[] countries = objectMapper.readValue(response.body(), JsonNode[].class);
+        JsonNode[] countries = objectMapper.readValue(response.body(), new TypeReference<>() {});
 
         if (countries.length == 0) {
             return null;

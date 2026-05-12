@@ -1,5 +1,6 @@
 package pd20.Client;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,10 +16,10 @@ import java.time.Duration;
 
 @NoArgsConstructor
 public final class OpenMeteoClient {
-    ObjectMapper objectMapper = new ObjectMapper()
+    private ObjectMapper objectMapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-    HttpClient client = HttpClient.newBuilder()
+    private HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(5))
             .followRedirects(HttpClient.Redirect.NORMAL)
             .version(HttpClient.Version.HTTP_2)
@@ -39,6 +40,6 @@ public final class OpenMeteoClient {
         JsonNode tree = objectMapper.readTree(response.body());
         JsonNode weather = tree.get("current_weather");
 
-        return objectMapper.treeToValue(weather, Weather.class);
+        return objectMapper.treeToValue(weather, new TypeReference<>() {});
     }
 }

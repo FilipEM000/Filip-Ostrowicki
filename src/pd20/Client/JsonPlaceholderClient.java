@@ -1,5 +1,6 @@
 package pd20.Client;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NoArgsConstructor;
@@ -13,16 +14,15 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 @NoArgsConstructor
 public final class JsonPlaceholderClient {
-    ObjectMapper objectMapper = new ObjectMapper()
+    private ObjectMapper objectMapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-    HttpClient client = HttpClient.newBuilder()
+    private HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(5))
             .followRedirects(HttpClient.Redirect.NORMAL)
             .version(HttpClient.Version.HTTP_2)
@@ -35,7 +35,8 @@ public final class JsonPlaceholderClient {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        return objectMapper.readValue(response.body(), User.class);
+
+        return objectMapper.readValue(response.body(), new TypeReference<>() {});
     }
 
     public List<Todo> getIncompleteTodoList(Long userId) throws IOException, InterruptedException {
@@ -48,7 +49,9 @@ public final class JsonPlaceholderClient {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return Arrays.stream(objectMapper.readValue(response.body(), Todo[].class))
+        List<Todo> todos = objectMapper.readValue(response.body(), new TypeReference<>() {});
+
+        return todos.stream()
                 .filter(todo -> !todo.isCompleted())
                 .toList();
     }
@@ -63,7 +66,9 @@ public final class JsonPlaceholderClient {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return Arrays.stream(objectMapper.readValue(response.body(), Post[].class))
+        List<Post> posts = objectMapper.readValue(response.body(), new TypeReference<>() {});
+
+        return posts.stream()
                 .sorted(Comparator.comparing(Post::getId, Comparator.reverseOrder()))
                 .limit(3)
                 .toList();
