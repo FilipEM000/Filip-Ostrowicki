@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class JsonWriter {
-    ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = new ObjectMapper();
 
     public void writeToJson(UserReport report) {
         try {
