@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class SaleRepository {
-    private final Path path = Path.of("src/pd17/sales.csv");
+    private final Path path = Path.of("src/main.pd17/sales.csv");
     private final List<Sale> sales = CsvParser.loadSales(path);
 
     public List<Sale> getAll(){

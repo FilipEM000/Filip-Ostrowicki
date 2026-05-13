@@ -10,9 +10,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SaleService {
-    SaleRepository saleRepository = new SaleRepository();
+    SaleRepository saleRepository;
 
-    public SaleService() throws IOException {
+    public SaleService(SaleRepository saleRepository){
+        this.saleRepository = saleRepository;
     }
 
     public BigDecimal getTotalRevenue() {

@@ -16,7 +16,7 @@ public class LaptopStore {
         if (amount > availableQuantity) {
             return new OrderStats(name, 0, false, "Nie udało się");
         } else {
-            availableQuantity = availableQuantity - amount;
+            availableQuantity -= amount;
             return new OrderStats(name, amount, true, "Udało się");
         }
     }

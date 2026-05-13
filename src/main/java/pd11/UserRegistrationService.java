@@ -88,7 +88,7 @@ public class UserRegistrationService {
         };
     }
 
-    private static boolean validateEmail(String email, UserRepository database) {
+    public static boolean validateEmail(String email, UserRepository database) {
         if (email == null) {
             throw new ValidationException("Email", "Email nie istnieje");
         }
