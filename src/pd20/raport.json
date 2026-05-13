@@ -1,0 +1,111 @@
+{
+  "user" : {
+    "id" : 3,
+    "name" : "Clementine Bauch",
+    "username" : "Samantha",
+    "email" : "Nathan@yesenia.net",
+    "address" : {
+      "street" : "Douglas Extension",
+      "suite" : "Suite 847",
+      "city" : "McKenziehaven",
+      "zipCode" : null,
+      "geo" : {
+        "lat" : -68.6102,
+        "lng" : -47.0653
+      }
+    },
+    "phone" : "1-463-123-4447",
+    "website" : "ramiro.info",
+    "company" : {
+      "name" : "Romaguera-Jacobson",
+      "catchPhrase" : "Face to face bifurcated interface",
+      "bs" : "e-enable strategic applications"
+    }
+  },
+  "todos" : [ {
+    "userId" : 3,
+    "id" : 41,
+    "title" : "aliquid amet impedit consequatur aspernatur placeat eaque fugiat suscipit",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 42,
+    "title" : "rerum perferendis error quia ut eveniet",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 45,
+    "title" : "velit soluta adipisci molestias reiciendis harum",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 46,
+    "title" : "vel voluptatem repellat nihil placeat corporis",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 47,
+    "title" : "nam qui rerum fugiat accusamus",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 48,
+    "title" : "sit reprehenderit omnis quia",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 49,
+    "title" : "ut necessitatibus aut maiores debitis officia blanditiis velit et",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 51,
+    "title" : "distinctio exercitationem ab doloribus",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 52,
+    "title" : "nesciunt dolorum quis recusandae ad pariatur ratione",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 53,
+    "title" : "qui labore est occaecati recusandae aliquid quam",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 57,
+    "title" : "pariatur et magnam ea doloribus similique voluptatem rerum quia",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 58,
+    "title" : "est dicta totam qui explicabo doloribus qui dignissimos",
+    "completed" : false
+  }, {
+    "userId" : 3,
+    "id" : 59,
+    "title" : "perspiciatis velit id laborum placeat iusto et aliquam odio",
+    "completed" : false
+  } ],
+  "posts" : [ {
+    "userId" : 3,
+    "id" : 30,
+    "title" : "a quo magni similique perferendis",
+    "body" : "alias dolor cumque\nimpedit blanditiis non eveniet odio maxime\nblanditiis amet eius quis tempora quia autem rem\na provident perspiciatis quia"
+  }, {
+    "userId" : 3,
+    "id" : 29,
+    "title" : "iusto eius quod necessitatibus culpa ea",
+    "body" : "odit magnam ut saepe sed non qui\ntempora atque nihil\naccusamus illum doloribus illo dolor\neligendi repudiandae odit magni similique sed cum maiores"
+  }, {
+    "userId" : 3,
+    "id" : 28,
+    "title" : "delectus ullam et corporis nulla voluptas sequi",
+    "body" : "non et quaerat ex quae ad maiores\nmaiores recusandae totam aut blanditiis mollitia quas illo\nut voluptatibus voluptatem\nsimilique nostrum eum"
+  } ],
+  "weather" : {
+    "temperature" : -6.0,
+    "windspeed" : 38.8
+  }
+}
