@@ -2,7 +2,6 @@ package pd17.sale;
 
 import pd17.Product;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SaleService {
-    SaleRepository saleRepository;
+    private final SaleRepository saleRepository;
 
     public SaleService(SaleRepository saleRepository){
         this.saleRepository = saleRepository;
