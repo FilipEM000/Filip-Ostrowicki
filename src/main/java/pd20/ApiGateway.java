@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class ApiGateway {
-    JsonPlaceholderClient jsonPlaceholderClient = new JsonPlaceholderClient();
-    OpenMeteoClient openMeteoClient = new OpenMeteoClient();
+    private JsonPlaceholderClient jsonPlaceholderClient = new JsonPlaceholderClient();
+    private OpenMeteoClient openMeteoClient = new OpenMeteoClient();
 
     public UserReport getUserReport(Long userId) throws IOException, InterruptedException {
         User user = jsonPlaceholderClient.getUser(userId);

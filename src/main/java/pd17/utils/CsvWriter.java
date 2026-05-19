@@ -28,11 +28,11 @@ public final class CsvWriter {
 
     public void writeStatistics(SaleService saleService) throws IOException {
         List<CategoryStatistics> lines = getStatistics(saleService);
-        Files.writeString(Path.of("src/pd17/output.csv"), "Kategoria;Łączny przychód;Średnia cena\n");
+        Files.writeString(Path.of("src/main.pd17/output.csv"), "Kategoria;Łączny przychód;Średnia cena\n");
 
         lines.forEach(line -> {
             try {
-                Files.writeString(Path.of("src/pd17/output.csv"), line.category() + ";" + line.totalRevenue() + ";" + line.averagePrice() + "\n", StandardOpenOption.APPEND);
+                Files.writeString(Path.of("src/main.pd17/output.csv"), line.category() + ";" + line.totalRevenue() + ";" + line.averagePrice() + "\n", StandardOpenOption.APPEND);
             } catch (IOException e) {
                 System.err.println("Wystąpił błąd podczas zapisu do pliku");
                 throw new RuntimeException(e);
@@ -43,6 +43,6 @@ public final class CsvWriter {
     public void exportToJson(SaleService saleService) throws IOException {
         String summaryStatistics = objectMapper.writeValueAsString(getStatistics(saleService));
 
-        Files.writeString(Path.of("src/pd17/output.json"), summaryStatistics);
+        Files.writeString(Path.of("src/main.pd17/output.json"), summaryStatistics);
     }
 }

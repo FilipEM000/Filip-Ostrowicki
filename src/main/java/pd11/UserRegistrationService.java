@@ -31,11 +31,11 @@ public class UserRegistrationService {
 
     private static void registerUser(String name, String email, String password, UserRepository database) {
         if (!isNameValid(name)) {
-            throw new ValidationException("Name", "W nazwie pojawiły się niedozwolone znaki");
+            throw new ValidationException("W nazwie pojawiły się niedozwolone znaki");
         }
 
-        if (!validateEmail(email, database)) {
-            throw new ValidationException("Email", "Zła składnia emaila");
+        if (!isValidEmail(email, database)) {
+            throw new ValidationException("Zła składnia emaila");
         }
 
         if (resolvePasswordStrength(password) == PasswordStrength.WEAK) {
@@ -48,17 +48,17 @@ public class UserRegistrationService {
 
     private static boolean isNameValid(String name) {
         if (name == null) {
-            throw new ValidationException("Nazwa", "Nazwa nie istnieje");
+            throw new ValidationException("Nazwa nie istnieje");
         }
 
         if (name.trim().length() < 2 || name.trim().length() > 100) {
-            throw new ValidationException("Nazwa", "Niepoprawna długość nazwy");
+            throw new ValidationException("Niepoprawna długość nazwy");
         }
 
         return name.trim().matches("[A-Za-z\\s-]+");
     }
 
-    private static PasswordStrength resolvePasswordStrength(String password) {
+    public static PasswordStrength resolvePasswordStrength(String password) {
         int score = 0;
 
         if (password == null) {
@@ -88,9 +88,9 @@ public class UserRegistrationService {
         };
     }
 
-    private static boolean validateEmail(String email, UserRepository database) {
+    public static boolean isValidEmail(String email, UserRepository database) {
         if (email == null) {
-            throw new ValidationException("Email", "Email nie istnieje");
+            throw new ValidationException("Email nie istnieje");
         }
 
         if (database.containsEmail(email)) {
@@ -100,7 +100,7 @@ public class UserRegistrationService {
         return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
     }
 
-    private static String hashPassword(String password) {
+    public static String hashPassword(String password) {
         return "hashed_" + password;
     }
 }
